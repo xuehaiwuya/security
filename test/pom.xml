@@ -27,12 +27,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.imooc.security</groupId>
-			<artifactId>imooc-security-browser</artifactId>
+			<artifactId>security-browser</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.imooc.security</groupId>
-			<artifactId>imooc-security-authorize</artifactId>
+			<artifactId>security-authorize</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
