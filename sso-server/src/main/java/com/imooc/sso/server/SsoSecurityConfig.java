@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.imooc.sso.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,28 +11,29 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * @author zhailiang
- *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 17:43
  */
 @Configuration
 public class SsoSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	private UserDetailsService userDetailsService;
-	
-	@Bean
-	public PasswordEncoder passwordEncoder()	{
-		return new BCryptPasswordEncoder();
-	}
-	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-	}
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.formLogin().and().authorizeRequests().anyRequest().authenticated();
-	}
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.formLogin().and().authorizeRequests().anyRequest().authenticated();
+    }
 
 }

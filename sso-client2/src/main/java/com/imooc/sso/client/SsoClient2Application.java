@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.imooc.sso.client;
 
 import org.springframework.boot.SpringApplication;
@@ -11,21 +8,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author zhailiang
- *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 17:42
  */
 @SpringBootApplication
 @RestController
 @EnableOAuth2Sso
 public class SsoClient2Application {
-	
-	@GetMapping("/user")
-	public Authentication user(Authentication user) {
-		return user;
-	}
 
-	public static void main(String[] args) {
-		SpringApplication.run(SsoClient2Application.class, args);
-	}
-	
+    @GetMapping("/user")
+    public Authentication user(Authentication user) {
+        return user;
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(SsoClient2Application.class, args);
+    }
+
 }

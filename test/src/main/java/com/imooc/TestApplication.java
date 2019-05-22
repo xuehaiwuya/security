@@ -1,9 +1,4 @@
-/**
- * 
- */
 package com.imooc;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -15,29 +10,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
- * @author zhailiang
- *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 17:46
  */
 @SpringBootApplication
 @RestController
 public class TestApplication {
-	
-	@Autowired
-	private ProviderSignInUtils providerSignInUtils;
-	
-	@GetMapping("/me")
-	public Authentication me(Authentication authentication) {
-		return authentication;
-	}
-	
-	@PostMapping("/user/regist")
-	public void regist(HttpServletRequest request){
-		providerSignInUtils.doPostSignUp("jojo", new ServletWebRequest(request));
-	}
-	
-	public static void main(String[] args) {
-		SpringApplication.run(TestApplication.class, args);
-	}
+
+    @Autowired
+    private ProviderSignInUtils providerSignInUtils;
+
+    @GetMapping("/me")
+    public Authentication me(Authentication authentication) {
+        return authentication;
+    }
+
+    @PostMapping("/user/regist")
+    public void regist(HttpServletRequest request) {
+        providerSignInUtils.doPostSignUp("jojo", new ServletWebRequest(request));
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(TestApplication.class, args);
+    }
 
 }

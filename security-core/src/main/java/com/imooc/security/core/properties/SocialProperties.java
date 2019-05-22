@@ -1,46 +1,45 @@
-/**
- * 
- */
 package com.imooc.security.core.properties;
 
 /**
  * 社交登录配置项
- * @author zhailiang
  *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 14:42
  */
 public class SocialProperties {
-	
-	/**
-	 * 社交登录功能拦截的url
-	 */
-	private String filterProcessesUrl = "/auth";
 
-	private QQProperties qq = new QQProperties();
-	
-	private WeixinProperties weixin = new WeixinProperties();
+    /**
+     * 社交登录功能拦截的url
+     */
+    private String filterProcessesUrl = "/auth";
 
-	public QQProperties getQq() {
-		return qq;
-	}
+    private QQProperties qq = new QQProperties();
 
-	public void setQq(QQProperties qq) {
-		this.qq = qq;
-	}
+    private WeixinProperties weixin = new WeixinProperties();
 
-	public String getFilterProcessesUrl() {
-		return filterProcessesUrl;
-	}
+    public QQProperties getQq() {
+        return qq;
+    }
 
-	public void setFilterProcessesUrl(String filterProcessesUrl) {
-		this.filterProcessesUrl = filterProcessesUrl;
-	}
+    public void setQq(QQProperties qq) {
+        this.qq = qq;
+    }
 
-	public WeixinProperties getWeixin() {
-		return weixin;
-	}
+    public String getFilterProcessesUrl() {
+        return filterProcessesUrl;
+    }
 
-	public void setWeixin(WeixinProperties weixin) {
-		this.weixin = weixin;
-	}
-	
+    public void setFilterProcessesUrl(String filterProcessesUrl) {
+        this.filterProcessesUrl = filterProcessesUrl;
+    }
+
+    public WeixinProperties getWeixin() {
+        return weixin;
+    }
+
+    public void setWeixin(WeixinProperties weixin) {
+        this.weixin = weixin;
+    }
+
 }

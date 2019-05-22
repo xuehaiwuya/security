@@ -1,44 +1,32 @@
-/**
- * 
- */
 package com.imooc.security.rbac.dto;
 
 /**
- * @author zhailiang
+ * RoleInfo
  *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 10:43
  */
 public class RoleInfo {
-	
-	private Long id;
-	
-	private String name;
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
+    private Long id;
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private String name;
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

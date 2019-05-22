@@ -1,68 +1,50 @@
-/**
- * 
- */
 package com.imooc.security.rbac.dto;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * @author zhailiang
+ * AdminInfo
  *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 10:42
  */
 public class AdminInfo {
-	
-	private Long id;
-	/**
-	 * 角色id 
-	 */
-	@NotBlank(message = "角色id不能为空")
-	private Long roleId;
-	/**
-	 * 用户名
-	 */
-	@NotBlank(message = "用户名不能为空")
-	private String username;
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
+    private Long id;
+    /**
+     * 角色id
+     */
+    @NotBlank(message = "角色id不能为空")
+    private Long roleId;
+    /**
+     * 用户名
+     */
+    @NotBlank(message = "用户名不能为空")
+    private String username;
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * @return the roleId
-	 */
-	public Long getRoleId() {
-		return roleId;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @param roleId the roleId to set
-	 */
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
+    public Long getRoleId() {
+        return roleId;
+    }
 
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
 
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }

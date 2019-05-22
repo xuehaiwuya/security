@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.imooc.security;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,19 +7,22 @@ import org.springframework.stereotype.Component;
 import com.imooc.security.core.authorize.AuthorizeConfigProvider;
 
 /**
- * @author zhailiang
+ * DemoAuthorizeConifgProvider
  *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 16:46
  */
 @Component
 public class DemoAuthorizeConifgProvider implements AuthorizeConfigProvider {
 
-	/* (non-Javadoc)
-	 * @see com.imooc.security.core.authorize.AuthorizeConfigProvider#config(org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)
-	 */
-	@Override
-	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
-		//demo项目授权配置
-		return false;
-	}
+    @Override
+    public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+        //demo项目授权配置
+        //config.antMatchers("/demo.html").hasRole("ADMIN");
+        //config.anyRequest().access("@rbacService.hasPermission(request,authentication)");
+        //return true;
+        return false;
+    }
 
 }

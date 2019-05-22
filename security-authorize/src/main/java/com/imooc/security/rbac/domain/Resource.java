@@ -1,201 +1,170 @@
-/**
- * 
- */
 package com.imooc.security.rbac.domain;
 
+import com.imooc.security.rbac.dto.ResourceInfo;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.data.annotation.CreatedDate;
-
-import com.imooc.security.rbac.dto.ResourceInfo;
-
 /**
  * 需要控制权限的资源，以业务人员能看懂的name呈现.实际关联到一个或多个url上。
- * 
+ * <p>
  * 树形结构。
- * 
- * @author zhailiang
  *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 10:38
  */
 @Entity
 public class Resource {
 
-	/**
-	 * 数据库表主键
-	 */
-	@Id
-	@GeneratedValue
-	private Long id;
-	/**
-	 * 审计日志，记录条目创建时间，自动赋值，不需要程序员手工赋值
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@CreatedDate
-	private Date createdTime;
-	/**
-	 * 资源名称，如xx菜单，xx按钮
-	 */
-	private String name;
-	/**
-	 * 资源链接
-	 */
-	private String link;
-	/**
-	 * 图标
-	 */
-	private String icon;
-	/**
-	 * 资源类型
-	 */
-	@Enumerated(EnumType.STRING)
-	private ResourceType type;
-	/**
-	 * 实际需要控制权限的url
-	 */
-	@ElementCollection
-	private Set<String> urls;
-	/**
-	 * 父资源
-	 */
-	@ManyToOne
-	private Resource parent;
-	/**
-	 * 子资源
-	 */
-	@OneToMany(mappedBy = "parent")
-	@OrderBy("sort ASC")
-	private List<Resource> childs = new ArrayList<>();
+    /**
+     * 数据库表主键
+     */
+    @Id
+    @GeneratedValue
+    private Long id;
+    /**
+     * 审计日志，记录条目创建时间，自动赋值，不需要程序员手工赋值
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createdTime;
+    /**
+     * 资源名称，如xx菜单，xx按钮
+     */
+    private String name;
+    /**
+     * 资源链接
+     */
+    private String link;
+    /**
+     * 图标
+     */
+    private String icon;
+    /**
+     * 资源类型
+     */
+    @Enumerated(EnumType.STRING)
+    private ResourceType type;
+    /**
+     * 实际需要控制权限的url
+     */
+    @ElementCollection
+    private Set<String> urls;
+    /**
+     * 父资源
+     */
+    @ManyToOne
+    private Resource parent;
+    /**
+     * 子资源
+     */
+    @OneToMany(mappedBy = "parent")
+    @OrderBy("sort ASC")
+    private List<Resource> childs = new ArrayList<>();
 
-	public ResourceInfo toTree(Admin admin) {
-		ResourceInfo result = new ResourceInfo();
-		BeanUtils.copyProperties(this, result);
-		Set<Long> resourceIds = admin.getAllResourceIds();
-		
-		List<ResourceInfo> children = new ArrayList<ResourceInfo>();
-		for (Resource child : getChilds()) {
-			if(StringUtils.equals(admin.getUsername(), "admin") || 
-					resourceIds.contains(child.getId())){
-				children.add(child.toTree(admin));
-			}
-		}
-		result.setChildren(children);
-		return result;
-	}
-	
-	public void addChild(Resource child) {
-		childs.add(child);
-		child.setParent(this);
-	}
-	/**
-	 * 序号
-	 */
-	private int sort;
+    public ResourceInfo toTree(Admin admin) {
+        ResourceInfo result = new ResourceInfo();
+        BeanUtils.copyProperties(this, result);
+        Set<Long> resourceIds = admin.getAllResourceIds();
 
-	public Long getId() {
-		return id;
-	}
+        List<ResourceInfo> children = new ArrayList<ResourceInfo>();
+        for (Resource child : getChilds()) {
+            if (StringUtils.equals(admin.getUsername(), "admin") ||
+                    resourceIds.contains(child.getId())) {
+                children.add(child.toTree(admin));
+            }
+        }
+        result.setChildren(children);
+        return result;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void addChild(Resource child) {
+        childs.add(child);
+        child.setParent(this);
+    }
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * 序号
+     */
+    private int sort;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Set<String> getUrls() {
-		return urls;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setUrls(Set<String> urls) {
-		this.urls = urls;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Resource getParent() {
-		return parent;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setParent(Resource parent) {
-		this.parent = parent;
-	}
+    public Set<String> getUrls() {
+        return urls;
+    }
 
-	public List<Resource> getChilds() {
-		return childs;
-	}
+    public void setUrls(Set<String> urls) {
+        this.urls = urls;
+    }
 
-	public void setChilds(List<Resource> childs) {
-		this.childs = childs;
-	}
+    public Resource getParent() {
+        return parent;
+    }
 
-	public int getSort() {
-		return sort;
-	}
+    public void setParent(Resource parent) {
+        this.parent = parent;
+    }
 
-	public void setSort(int sort) {
-		this.sort = sort;
-	}
+    public List<Resource> getChilds() {
+        return childs;
+    }
 
-	/**
-	 * @return the link
-	 */
-	public String getLink() {
-		return link;
-	}
+    public void setChilds(List<Resource> childs) {
+        this.childs = childs;
+    }
 
-	/**
-	 * @param link the link to set
-	 */
-	public void setLink(String link) {
-		this.link = link;
-	}
+    public int getSort() {
+        return sort;
+    }
 
-	/**
-	 * @return the icon
-	 */
-	public String getIcon() {
-		return icon;
-	}
+    public void setSort(int sort) {
+        this.sort = sort;
+    }
 
-	/**
-	 * @param icon the icon to set
-	 */
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
+    public String getLink() {
+        return link;
+    }
 
-	/**
-	 * @return the type
-	 */
-	public ResourceType getType() {
-		return type;
-	}
+    public void setLink(String link) {
+        this.link = link;
+    }
 
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(ResourceType type) {
-		this.type = type;
-	}
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public ResourceType getType() {
+        return type;
+    }
+
+    public void setType(ResourceType type) {
+        this.type = type;
+    }
 
 }

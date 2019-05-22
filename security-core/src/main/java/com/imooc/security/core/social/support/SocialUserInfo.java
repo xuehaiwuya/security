@@ -1,52 +1,63 @@
-/**
- * 
- */
 package com.imooc.security.core.social.support;
 
 /**
- * @author zhailiang
+ * 社交用户信息
  *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 14:49
  */
 public class SocialUserInfo {
-	
-	private String providerId;
-	
-	private String providerUserId;
-	
-	private String nickname;
-	
-	private String headimg;
+    /**
+     * 第三方登录的providerId
+     */
+    private String providerId;
 
-	public String getProviderId() {
-		return providerId;
-	}
+    /**
+     * openid
+     */
+    private String providerUserId;
 
-	public void setProviderId(String providerId) {
-		this.providerId = providerId;
-	}
+    /**
+     * 用户的昵称
+     */
+    private String nickname;
 
-	public String getProviderUserId() {
-		return providerUserId;
-	}
+    /**
+     * 用户的头像
+     */
+    private String headimg;
 
-	public void setProviderUserId(String providerUserId) {
-		this.providerUserId = providerUserId;
-	}
+    public String getProviderId() {
+        return providerId;
+    }
 
-	public String getNickname() {
-		return nickname;
-	}
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
+    }
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+    public String getProviderUserId() {
+        return providerUserId;
+    }
 
-	public String getHeadimg() {
-		return headimg;
-	}
+    public void setProviderUserId(String providerUserId) {
+        this.providerUserId = providerUserId;
+    }
 
-	public void setHeadimg(String headimg) {
-		this.headimg = headimg;
-	}
-	
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getHeadimg() {
+        return headimg;
+    }
+
+    public void setHeadimg(String headimg) {
+        this.headimg = headimg;
+    }
+
 }

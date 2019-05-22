@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.imooc.sso.server;
 
 import org.springframework.context.annotation.Bean;
@@ -15,47 +12,48 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
- * @author zhailiang
- *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 17:43
  */
 @Configuration
 @EnableAuthorizationServer
 public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-	
-	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory()
-				.withClient("imooc1")
-				.secret("imoocsecrect1")
-				.authorizedGrantTypes("authorization_code", "refresh_token")
-				.scopes("all")
-				.and()
-				.withClient("imooc2")
-				.secret("imoocsecrect2")
-				.authorizedGrantTypes("authorization_code", "refresh_token")
-				.scopes("all");
-	}
-	
-	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.tokenStore(jwtTokenStore()).accessTokenConverter(jwtAccessTokenConverter());
-	}
-	
-	@Override
-	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		security.tokenKeyAccess("isAuthenticated()");
-	}
-	
-	@Bean
-	public TokenStore jwtTokenStore() {
-		return new JwtTokenStore(jwtAccessTokenConverter());
-	}
-	
-	@Bean
-	public JwtAccessTokenConverter jwtAccessTokenConverter(){
-		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.inMemory()
+                .withClient("imooc1")
+                .secret("imoocsecrect1")
+                .authorizedGrantTypes("authorization_code", "refresh_token")
+                .scopes("all")
+                .and()
+                .withClient("imooc2")
+                .secret("imoocsecrect2")
+                .authorizedGrantTypes("authorization_code", "refresh_token")
+                .scopes("all");
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.tokenStore(jwtTokenStore()).accessTokenConverter(jwtAccessTokenConverter());
+    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.tokenKeyAccess("isAuthenticated()");
+    }
+
+    @Bean
+    public TokenStore jwtTokenStore() {
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey("imooc");
         return converter;
-	}
+    }
 
 }

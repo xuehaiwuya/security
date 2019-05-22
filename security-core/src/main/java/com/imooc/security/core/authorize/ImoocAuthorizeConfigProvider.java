@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.imooc.security.core.authorize;
 
 import org.apache.commons.lang.StringUtils;
@@ -15,31 +12,32 @@ import com.imooc.security.core.properties.SecurityProperties;
 
 /**
  * 核心模块的授权配置提供器，安全模块涉及的url的授权配置在这里。
- * 
- * @author zhailiang
  *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 14:37
  */
 @Component
 @Order(Integer.MIN_VALUE)
 public class ImoocAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
-	@Autowired
-	private SecurityProperties securityProperties;
+    @Autowired
+    private SecurityProperties securityProperties;
 
-	@Override
-	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
-		config.antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-				SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE,
-				SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_OPENID,
-				SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-				securityProperties.getBrowser().getSignInPage(), 
-				securityProperties.getBrowser().getSignUpUrl(),
-				securityProperties.getBrowser().getSession().getSessionInvalidUrl()).permitAll();
+    @Override
+    public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+        config.antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
+                SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE,
+                SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_OPENID,
+                SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
+                securityProperties.getBrowser().getSignInPage(),
+                securityProperties.getBrowser().getSignUpUrl(),
+                securityProperties.getBrowser().getSession().getSessionInvalidUrl()).permitAll();
 
-		if (StringUtils.isNotBlank(securityProperties.getBrowser().getSignOutUrl())) {
-			config.antMatchers(securityProperties.getBrowser().getSignOutUrl()).permitAll();
-		}
-		return false;
-	}
+        if (StringUtils.isNotBlank(securityProperties.getBrowser().getSignOutUrl())) {
+            config.antMatchers(securityProperties.getBrowser().getSignOutUrl()).permitAll();
+        }
+        return false;
+    }
 
 }

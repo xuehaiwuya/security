@@ -1,14 +1,14 @@
-/**
- * 
- */
 package com.imooc.service;
 
 /**
- * @author zhailiang
+ * HelloService
  *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 16:51
  */
 public interface HelloService {
-	
-	String greeting(String name);
+
+    String greeting(String name);
 
 }

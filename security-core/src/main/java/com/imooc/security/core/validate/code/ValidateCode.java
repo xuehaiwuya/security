@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.imooc.security.core.validate.code;
 
 import java.io.Serializable;
@@ -9,49 +6,45 @@ import java.time.LocalDateTime;
 
 /**
  * 验证码信息封装类
- * 
- * @author zhailiang
  *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 15:13
  */
 public class ValidateCode implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1588203828504660915L;
 
-	private String code;
-	
-	private LocalDateTime expireTime;
-	
-	public ValidateCode(String code, int expireIn){
-		this.code = code;
-		this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
-	}
-	
-	public ValidateCode(String code, LocalDateTime expireTime){
-		this.code = code;
-		this.expireTime = expireTime;
-	}
-	
-	public boolean isExpried() {
-		return LocalDateTime.now().isAfter(expireTime);
-	}
+    private static final long serialVersionUID = 1588203828504660915L;
+    private String code;
+    private LocalDateTime expireTime;
 
-	public String getCode() {
-		return code;
-	}
+    public ValidateCode(String code, int expireIn) {
+        this.code = code;
+        this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public ValidateCode(String code, LocalDateTime expireTime) {
+        this.code = code;
+        this.expireTime = expireTime;
+    }
 
-	public LocalDateTime getExpireTime() {
-		return expireTime;
-	}
+    public boolean isExpried() {
+        return LocalDateTime.now().isAfter(expireTime);
+    }
 
-	public void setExpireTime(LocalDateTime expireTime) {
-		this.expireTime = expireTime;
-	}
-	
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public LocalDateTime getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(LocalDateTime expireTime) {
+        this.expireTime = expireTime;
+    }
+
 }

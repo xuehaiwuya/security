@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.imooc.security.rbac.authorize;
 
 import org.springframework.core.annotation.Order;
@@ -12,26 +9,25 @@ import org.springframework.stereotype.Component;
 import com.imooc.security.core.authorize.AuthorizeConfigProvider;
 
 /**
- * @author zhailiang
+ * RbacAuthorizeConfigProvider
+ *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 10:34
  */
 @Component
-@Order(Integer.MAX_VALUE)
+@Order
 public class RbacAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
-	/* (non-Javadoc)
-	 * @see com.imooc.security.core.authorize.AuthorizeConfigProvider#config(org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)
-	 */
-	@Override
-	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
-		config
-			.antMatchers(HttpMethod.GET, "/fonts/**").permitAll()
-			.antMatchers(HttpMethod.GET, 
-					"/**/*.html",
-					"/admin/me",
-					"/resource").authenticated()
-			.anyRequest()
-				.access("@rbacService.hasPermission(request, authentication)");
-		return true;
-	}
+    @Override
+    public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+        config
+                .antMatchers(HttpMethod.GET, "/fonts/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/**/*.html", "/admin/me", "/resource")
+                .authenticated()
+                .anyRequest()
+                .access("@rbacService.hasPermission(request, authentication)");
+        return true;
+    }
 
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.imooc.security.browser.authorize;
 
 import org.springframework.core.annotation.Order;
@@ -13,26 +10,23 @@ import com.imooc.security.core.authorize.AuthorizeConfigProvider;
 
 /**
  * 浏览器环境默认的授权配置，对常见的静态资源，如js,css，图片等不验证身份
- * 
- * @author zhailiang
  *
+ * @author Leslie
+ * @email panxiang_work@163.com
+ * @create 2019/5/22 14:04
  */
 @Component
 @Order(Integer.MIN_VALUE)
 public class BrowserAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
-	/* (non-Javadoc)
-	 * @see com.imooc.security.core.authorize.AuthorizeConfigProvider#config(org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)
-	 */
-	@Override
-	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
-		config.antMatchers(HttpMethod.GET, 
-			"/**/*.js",
-			"/**/*.css",
-			"/**/*.jpg",
-			"/**/*.png",
-			"/**/*.gif").permitAll();
-		return false;
-	}
-
+    @Override
+    public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+        config.antMatchers(HttpMethod.GET,
+                "/**/*.js",
+                "/**/*.css",
+                "/**/*.jpg",
+                "/**/*.png",
+                "/**/*.gif").permitAll();
+        return false;
+    }
 }
